@@ -16,9 +16,14 @@ int main()
     {
         int a, b;
         cin >> a >> b;
-
+        // p.push_back({a,b});
         p.push_back(make_pair(a, b));
     }
+
+    // for (auto it : p)
+    // {
+    //     cout << it.first << " " << it.second << endl;
+    // }
 
     for (pair<int, int> it : p)
     {
