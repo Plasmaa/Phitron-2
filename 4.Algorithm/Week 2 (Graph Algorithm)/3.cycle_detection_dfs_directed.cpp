@@ -16,10 +16,12 @@ void dfs(int parent)
         if (pathVisit[child])
         {
             ans = true;
+            cout << parent << " " << child << endl;
         }
         if (!vis[child])
         {
             dfs(child);
+
         }
     }
     // kaj sesh

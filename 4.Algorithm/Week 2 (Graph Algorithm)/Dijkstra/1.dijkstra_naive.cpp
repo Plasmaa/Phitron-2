@@ -2,7 +2,7 @@
 using namespace std;
 
 const int N = 100;
-vector<pair<int, int>> v[N];
+vector<pair<int, int>> adj_list[N];
 int dis[N];
 
 void dijkstra(int src)
@@ -10,13 +10,14 @@ void dijkstra(int src)
     queue<pair<int, int>> q;
     q.push({src, 0});
     dis[src] = 0;
+
     while (!q.empty())
     {
         pair<int, int> parent = q.front();
         q.pop();
         int node = parent.first;
         int cost = parent.second;
-        for (pair<int, int> child : v[node])
+        for (pair<int, int> child : adj_list[node])
         {
             int childNode = child.first;
             int childCost = child.second;
@@ -38,14 +39,18 @@ int main()
     {
         int a, b, c;
         cin >> a >> b >> c;
-        v[a].push_back({b, c});
-        v[b].push_back({a, c});
+        adj_list[a].push_back({b, c});
+        adj_list[b].push_back({a, c});
     }
+
+    // placing the distance of each node to infinity
     for (int i = 0; i < n; i++)
     {
         dis[i] = INT_MAX;
     }
     dijkstra(0);
+
+    // viewing the distance of node n from 0
     for (int i = 0; i < n; i++)
     {
         cout << i << "-> " << dis[i] << endl;

@@ -1,10 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 const int N = 1e5 + 5;
 bool vis[N];
 vector<int> adj[N];
 int parentArray[N];
 bool ans;
+
 void dfs(int parent)
 {
     vis[parent] = true;
@@ -23,6 +25,7 @@ void dfs(int parent)
         }
     }
 }
+
 int main()
 {
     int n, e;

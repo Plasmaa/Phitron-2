@@ -18,7 +18,7 @@ int main()
     //     cout << "NO" << endl;
     for (auto it = s.begin(); it != s.end(); it++)
     {
-        cout << it << endl;
+        cout << *it << endl;
     }
     return 0;
 }
