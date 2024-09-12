@@ -2,7 +2,7 @@
 using namespace std;
 
 const int N = 100;
-vector<pair<int, int>> v[N];
+vector<pair<int, int>> adj_list[N];
 int dis[N];
 
 class cmp
@@ -25,7 +25,8 @@ void dijkstra(int src)
         pq.pop();
         int node = parent.first;
         int cost = parent.second;
-        for (pair<int, int> child : v[node])
+
+        for (pair<int, int> child : adj_list[node])
         {
             int childNode = child.first;
             int childCost = child.second;
@@ -47,8 +48,8 @@ int main()
     {
         int a, b, c;
         cin >> a >> b >> c;
-        v[a].push_back({b, c});
-        v[b].push_back({a, c});
+        adj_list[a].push_back({b, c});
+        adj_list[b].push_back({a, c});
     }
     for (int i = 0; i < n; i++)
     {
