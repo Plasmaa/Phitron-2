@@ -40,7 +40,7 @@ int main()
 
     for (int i = 1; i <= n; i++)
     {
-        dis[i] = INT_MAX;
+        dis[i] = LLONG_MAX;
     }
     dis[s] = 0;
 
@@ -48,11 +48,12 @@ int main()
     {
         for (auto it : edgeList)
         {
-            int u, v, w;
+            int u, v;
+            long long w;
             u = it.u;
             v = it.v;
             w = it.w;
-            if (dis[u] < INT_MAX && dis[u] + w < dis[v])
+            if (dis[u] < LLONG_MAX && dis[u] + w < dis[v])
             {
                 dis[it.v] = dis[it.u] + it.w;
             }
@@ -62,11 +63,12 @@ int main()
     bool cycle = false;
     for (auto it : edgeList)
     {
-        int u, v, w;
+        int u, v;
+        long long w;
         u = it.u;
         v = it.v;
         w = it.w;
-        if (dis[u] < INT_MAX && dis[u] + w < dis[v])
+        if (dis[u] < LLONG_MAX && dis[u] + w < dis[v])
         {
             cycle = true;
             break;
@@ -87,7 +89,7 @@ int main()
             int d;
             cin >> d;
 
-            if (dis[d] == INT_MAX)
+            if (dis[d] == LLONG_MAX)
             {
                 cout << "Not Possible" << endl;
             }
