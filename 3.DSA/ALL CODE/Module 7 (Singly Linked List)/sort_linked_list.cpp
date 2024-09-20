@@ -45,6 +45,8 @@ int main()
             break;
         insert_tail(head, tail, val);
     }
+
+    // bubble sort
     for (Node *i = head; i->next != NULL; i = i->next)
     {
         for (Node *j = i->next; j != NULL; j = j->next)

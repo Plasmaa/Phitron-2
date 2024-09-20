@@ -21,6 +21,8 @@ so its a all in one package , with the time complexity of only O(v^3) !
 #include <bits/stdc++.h>
 using namespace std;
 
+// #define long long int ll;
+// ll INF = 1e18;
 const int N = 1e5 + 5;
 int dis[N];
 
