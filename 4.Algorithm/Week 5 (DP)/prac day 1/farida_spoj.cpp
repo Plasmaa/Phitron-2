@@ -12,16 +12,16 @@ int dp[MAX_N];
 int max_coin(vector<int> &a, int n)
 {
     if (n < 0)
-        return 0; // Base case: No monsters left
+        return 0;
     if (n == 0)
-        return a[0]; // Base case: Only one monster
+        return a[0];
 
     if (dp[n] != -1)
         return dp[n];
 
-    ll op1 = max_coin(a, n - 1);        // Skip the current monster
-    ll op2 = max_coin(a, n - 2) + a[n]; // Take coins from the current monster
-    return dp[n] = max(op1, op2);       // Store and return the result
+    ll op1 = max_coin(a, n - 1);
+    ll op2 = max_coin(a, n - 2) + a[n];
+    return dp[n] = max(op1, op2);
 
     return dp[n];
 }

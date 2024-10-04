@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 int dp[1005][1005];
-bool subset_sum(int n, int a[], int s)
+
+bool subset_sum(int a[], int n, int s)
 {
     if (n == 0)
     {
@@ -14,15 +16,16 @@ bool subset_sum(int n, int a[], int s)
         return dp[n][s];
     if (a[n - 1] <= s)
     {
-        bool op1 = subset_sum(n - 1, a, s - a[n - 1]);
-        bool op2 = subset_sum(n - 1, a, s);
+        bool op1 = subset_sum(a, n - 1, s - a[n - 1]);
+        bool op2 = subset_sum(a, n - 1, s);
         return dp[n][s] = op1 || op2;
     }
     else
     {
-        return dp[n][s] = subset_sum(n - 1, a, s);
+        return dp[n][s] = subset_sum(a, n - 1, s);
     }
 }
+
 int main()
 {
     int n;
@@ -41,7 +44,7 @@ int main()
             dp[i][j] = -1;
         }
     }
-    if (subset_sum(n, a, s))
+    if (subset_sum(a, n, s))
     {
         cout << "YES" << endl;
     }
