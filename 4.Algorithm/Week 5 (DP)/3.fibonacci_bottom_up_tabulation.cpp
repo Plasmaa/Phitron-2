@@ -1,3 +1,10 @@
+/*
+
+    its called bottom up approach because it starts from the base of the array or the 0th index
+    we use loop to hover all over the array
+
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 

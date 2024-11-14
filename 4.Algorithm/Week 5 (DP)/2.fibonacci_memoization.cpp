@@ -11,6 +11,7 @@ using namespace std;
 const ll N = 1e6 + 5;
 ll dp[N];
 
+// O(n)
 ll fibo(ll n)
 {
     if (n == 0 || n == 1)
