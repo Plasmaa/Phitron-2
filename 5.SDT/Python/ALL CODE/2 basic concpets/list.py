@@ -16,7 +16,7 @@ print(numbers[1:7:2])
 print(numbers[2:7:-1])
 print(numbers[7:2:-1])
 print(numbers[7:2:-2])
-print(numbers[4:])
-print(numbers[:5])
-print(numbers[:]) # shortcut to copy a list
+print(numbers[4:]) # 4 to last index
+print(numbers[:5]) # upto 5th index from beginning
+print(numbers[:]) # shortcut to copy a list (from beginning to end)
 print(numbers[::-1]) #shortcut to reverse a list

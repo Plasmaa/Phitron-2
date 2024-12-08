@@ -21,13 +21,13 @@ print(name)
 # def function_name(num1, num2, *args, **kargs):
 
 
-# return multiple things from an array
+# # return multiple things from an array
 def a_lot(num1, num2):
     sum = num1 + num2
     mult = num1 * num2
     remain = num1 - num2
     # return [sum, mult, remain]
-    return sum, mult, remain
+    return sum, mult, remain # tuple
 
 
 everything = a_lot(55, 21)

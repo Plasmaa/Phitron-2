@@ -5,6 +5,7 @@ for num in numbers:
         odds.append(num)
 
 print(odds)
+
 # odd_nums = [num for num in numbers if num % 2 == 1]
 odd_nums = [num for num in numbers if num % 2 == 1 if num % 5 == 0]
 print(odd_nums)

@@ -12,14 +12,15 @@ output = squared(9)
 add = lambda x, y : x + y
 sum = add(11,33)
 # print(sum)
+
 numbers = [12, 56 , 98, 78, 56 , 12 , 6, 98]
 # doubled_nums = map(doubled, numbers)
 doubled_nums = map(lambda x: x*2, numbers)
 squared_nums = map(lambda x: x*x, numbers)
 print(numbers)
+
 # print(list(doubled_nums))
 print(list(squared_nums))
-
 
 
 actors = [
