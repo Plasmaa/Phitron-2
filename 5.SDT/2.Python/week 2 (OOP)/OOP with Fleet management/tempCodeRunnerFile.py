@@ -1,0 +1,1 @@
+def __init__(self, brand, model, price, color , memory):

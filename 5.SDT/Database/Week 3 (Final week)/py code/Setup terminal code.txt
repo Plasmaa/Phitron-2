@@ -1,9 +1,0 @@
-1) pip install virtualenv
-2) python.exe -m pip install --upgrade pip (optional -- to update pip)
-3) virtualenv myenv (create a virtual environment for future proof working)
-4) pip list (to view all the installed app)
-5) myenv\Scripts\activate (activate the virtual environtment "myenv")
-6) pip install mysql-connector-python (install mysql in python)
-7) pip freeze > requirements.txt (to share the version to others)
-
-
