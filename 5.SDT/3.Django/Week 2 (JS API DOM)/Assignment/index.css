@@ -1,0 +1,135 @@
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+#home-btn:hover {
+    background-color: lightblue;
+    transform: scale(1.05);
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #51c554;
+    color: white;
+}
+
+.search-container {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-container input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: lightblue;
+    transform: scale(1.05);
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.drink-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.drink-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    flex: 1;
+}
+
+.selected-drinks {
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 2px 2px 8px;
+}
+
+.selected-drinks ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card {
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px;
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    width: 100%;
+    max-width: 250px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.card button {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.card button:hover {
+    background-color: lightblue;
+}
+
+.card button.added {
+    background-color: gray;
+}
+
+.modal-content {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+.modal-body img {
+    max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 5px;
+    object-fit: cover;
+}

@@ -1,0 +1,39 @@
+.main-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-container {
+    width: 70%;
+    box-shadow: 4px 4px 8px gray;
+    margin: auto;
+    text-align: center;
+    /* height: 500px;
+    border: 1px solid black; */
+}
+
+
+
+.product-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.card {
+    border: 1px solid black;
+    padding: 10px;
+    box-shadow: 4px 4px 8px gray;
+}
+
+.card-img {
+    width: 150px;
+}
+
+.cart-info {
+    display: flex;
+    justify-content: space-around;
+}
