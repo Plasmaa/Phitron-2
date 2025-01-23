@@ -2,14 +2,31 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-    <p class="lal-bg">Test</p>
-    <img src="{% static 'images/Optimus.jpg' %}" alt="" width="200" height="200">
+    {% with count=0 %}
+    {% for name in names %}
+    {% if not name == "John" %}
+    <p>{{ name }}</p>
+    {% endif %}
+    {{ count|add:"1" }}
+    {% endfor %}
+    {{ count }}
+    {% endwith %}
+    <p>Count: {{ count }}</p>
+    <p></p>
+
+    {% for  in  %}{% endfor %}
+    {% csrf_token %}
+
+    <form action=""></form>
 </body>
+
 </html>
