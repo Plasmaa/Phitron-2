@@ -8,5 +8,7 @@ class TaskForm(forms.Form):
     assigned_to = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=[])
     
     def __init__(self, *args, **kwargs):
+        # print(args, kwargs)
         super().__init__(*args, **kwargs)
+        
         

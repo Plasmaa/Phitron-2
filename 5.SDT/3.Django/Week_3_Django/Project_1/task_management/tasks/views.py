@@ -18,10 +18,8 @@ def test(request):
     return render(request,'test.html',context)
 
 def create_task(request):
-    form = TaskForm()
-    context = {
-        "form": form
-    }
+    form = TaskForm(emplyees=["Mahmud", "Ahamed", "John", "Sarah", "Emily"])
+    context = {"form": form}
     return render(request,'task_form.html',context)
 
 
