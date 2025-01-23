@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from tasks.forms import TaskForm
 
 # Create your views here.
 
@@ -15,3 +16,12 @@ def test(request):
         "age": 23
     }
     return render(request,'test.html',context)
+
+def create_task(request):
+    form = TaskForm()
+    context = {
+        "form": form
+    }
+    return render(request,'task_form.html',context)
+
+
