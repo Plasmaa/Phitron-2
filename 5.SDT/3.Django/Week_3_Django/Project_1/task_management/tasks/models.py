@@ -10,6 +10,10 @@ class Project(models.Model):
 class Employee(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField(unique=True)
+    
+    # dander method
+    def __str__(self):
+        return self.name
 
 
 class Task(models.Model):
@@ -42,5 +46,6 @@ class TaskDetail(models.Model):
 # Task.objects.get(id=2)
 # select * from task where id = 2
 # ORM = Object Relational Mapping
+
 
 
