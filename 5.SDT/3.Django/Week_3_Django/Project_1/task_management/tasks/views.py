@@ -50,3 +50,20 @@ def create_task(request):
     context = {"form": form}
     return render(request,'task_form.html',context)
 
+
+def view_task(request):
+    all_tasks = Task.objects.all()
+    
+    # retrieve a specific task
+    specific_task = Task.objects.get(pk=1)
+    
+    # fetch 1st task
+    first_task = Task.objects.first()
+    
+    # fetch last task
+    last_task = Task.objects.last()
+    
+    return render(request, "show_task.html", {"tasks": all_tasks, "task3": specific_task, "task1": first_task, "task2": last_task})
+
+
+
