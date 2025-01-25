@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from tasks.forms import TaskForm, TaskModelForm
-from tasks.models import Employee, Task
+from tasks.models import *
+from datetime import date
+from django.db.models import Q
 
 # Create your views here.
 
@@ -52,6 +54,7 @@ def create_task(request):
 
 
 def view_task(request):
+    
     all_tasks = Task.objects.all()
     
     # retrieve a specific task
@@ -63,7 +66,26 @@ def view_task(request):
     # fetch last task
     last_task = Task.objects.last()
     
-    return render(request, "show_task.html", {"tasks": all_tasks, "task3": specific_task, "task1": first_task, "task2": last_task})
+    # using filter method showing completed tasks
+    completed_tasks = Task.objects.filter(status="COMPLETED")
+    
+    # using exclude method
+    pending_tasks = Task.objects.exclude(is_completed=True, status="PENDING")
+    
+    tasks_date = Task.objects.filter(due_date = date(2025,1,19))
+    
+    # using priority filter
+    high_priority_tasks = TaskDetail.objects.exclude(priority__in=["L","M"])
+    
+    
+    '''Show word that contain c'''
+    tasks_word = Task.objects.filter(title__icontains="c")
+    
+    return render(request, "show_task.html", {
+        "tasks": all_tasks, "task3": specific_task, "task1": first_task, "task2": last_task,
+        "completed_tasks": completed_tasks, "pending_tasks": pending_tasks, "tasks_date": tasks_date,
+        "high_priority_tasks": high_priority_tasks, "tasks_word": tasks_word
+        })
 
 
 

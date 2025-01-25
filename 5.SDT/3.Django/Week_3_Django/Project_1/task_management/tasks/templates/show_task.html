@@ -25,8 +25,100 @@
     <div>
         task3: {{ task3.title }}
     </div>
+
+
+    {% comment %} <div>
+        <h2>All Tasks</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <p>{{ task.title }}</p>
+                    <span>{{ task.status }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div> {% endcomment %}
+
+    <!-- Specific Task -->
+    <div>
+        <h2>Specific Task</h2>
+        <p>{{ task3.title }} - {{ task3.status }}</p>
+    </div>
+
+    <!-- First Task -->
+    <div>
+        <h2>First Task</h2>
+        <p>{{ task1.title }} - {{ task1.status }}</p>
+    </div>
+
+    <!-- Last Task -->
+    <div>
+        <h2>Last Task</h2>
+        <p>{{ task2.title }} - {{ task2.status }}</p>
+    </div>
+
+    <!-- Completed Tasks -->
+    <div>
+        <h2>Completed Tasks</h2>
+        <ul>
+            {% for task in completed_tasks %}
+                <li>
+                    <p>{{ task.title }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Pending Tasks -->
+    <div>
+        <h2>Pending Tasks</h2>
+        <ul>
+            {% for task in pending_tasks %}
+                <li>
+                    <p>{{ task.title }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <!-- Tasks for today -->
+        <h2>Tasks for Today</h2>
+        <ul>
+            <!-- loop through tasks and display title -->
+            {% for task in tasks_date %}
+                <li>
+                    <p>{{ task.title }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- High priority tasks -->
+    <div>
+        <h3>High Priority</h3>
+        <ul>
+        {% for task in high_priority_tasks %}
+            <li>
+                <p>{{ task.task }}</p>
+                <span>{{ task.priority }}</span>
+            </li>
+        {% endfor %}
+        </ul>  
+    </div>
     
-    
+    {% comment %} words paper in it  {% endcomment %}
+    <div>
+        <h3>Tasks with word paper</h3>
+        <ul>
+        {% for task in tasks_word %}
+            <li>
+                <p>{{ task.title }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
 </body>
 
 </html>
