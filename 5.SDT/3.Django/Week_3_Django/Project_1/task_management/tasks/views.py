@@ -8,7 +8,22 @@ from django.db.models import Q
 # Create your views here.
 
 def manager_dashboard(request):
-    return render(request,'dashboard/manager-dashboard.html')
+    tasks = Task.objects.all()
+    
+    total_task = tasks.count()
+    pending_tasks = tasks.filter(status="PENDING").count()
+    in_progress_tasks = tasks.filter(status="IN_PROGRESS").count()
+    completed_task = tasks.filter(status="COMPLETED").count()
+    
+    context = {
+        "tasks": tasks,
+        "total_task": total_task,
+        "pending_tasks": pending_tasks,
+        "in_progress_tasks": in_progress_tasks,
+        "completed_task": completed_task   
+    }
+    
+    return render(request,'dashboard/manager-dashboard.html', context)
 
 def user_dashboard(request):
     return render(request,'dashboard/user-dashboard.html')
@@ -30,24 +45,6 @@ def create_task(request):
             '''For Model form data'''
             form.save()
             return render(request,'task_form.html', {"form": form, "message": "Task created successfully"})
-        
-        
-            '''For Django form data'''
-            # data = form.cleaned_data
-            # title = data.get("title")
-            # description = data.get("description")
-            # due_date = data.get("due_date")
-            # assigned_to = data.get("assigned_to")
-            
-            # task = Task.objects.create(title = title, description = description, due_date = due_date)
-            # task.assigned_to.set(assigned_to)
-            
-            # # Assign employee to tasks
-            # for emp_id in assigned_to:
-            #     employee = Employee.objects.get(id=emp_id)
-            #     employee.tasks.add(task)
-            
-            # return HttpResponse("Task created successfully")
             
     context = {"form": form}
     return render(request,'task_form.html',context)
