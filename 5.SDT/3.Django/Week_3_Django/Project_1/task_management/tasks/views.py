@@ -3,24 +3,36 @@ from django.http import HttpResponse
 from tasks.forms import TaskForm, TaskModelForm
 from tasks.models import *
 from datetime import date
-from django.db.models import Q
+from django.db.models import Q, Count, Sum, Avg, Max, Min
 
 # Create your views here.
 
 def manager_dashboard(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.select_related("details").prefetch_related("assigned_to").all() 
     
-    total_task = tasks.count()
-    pending_tasks = tasks.filter(status="PENDING").count()
-    in_progress_tasks = tasks.filter(status="IN_PROGRESS").count()
-    completed_task = tasks.filter(status="COMPLETED").count()
+    
+    # total_task = tasks.count()
+    # pending_tasks = tasks.filter(status="PENDING").count()
+    # in_progress_tasks = tasks.filter(status="IN_PROGRESS").count()
+    # completed_task = tasks.filter(status="COMPLETED").count()
+    
+    # count = {
+    #     "total_task": tasks.count(),
+    #     "pending_tasks": tasks.filter(status="PENDING").count(),
+    #     "in_progress_tasks": tasks.filter(status="IN_PROGRESS").count(),
+    #     "completed_task": tasks.filter(status="COMPLETED").count()
+    # }
+    
+    counts = Task.objects.aggregate(
+        total=Count('id'),
+        completed=Count('id', filter=Q(status="COMPLETED")),
+        pending=Count('id', filter=Q(status="PENDING")),
+        in_progress=Count('id', filter=Q(status="IN_PROGRESS")),
+    )
     
     context = {
         "tasks": tasks,
-        "total_task": total_task,
-        "pending_tasks": pending_tasks,
-        "in_progress_tasks": in_progress_tasks,
-        "completed_task": completed_task   
+        "counts": counts
     }
     
     return render(request,'dashboard/manager-dashboard.html', context)
