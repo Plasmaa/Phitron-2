@@ -14,15 +14,18 @@
     <div class="w-1/2 mx-auto mt-10">
         <div>
             <p>
-                {% if message %}
-                    <p>{{ message }}</p>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="px-2 py-1 {% if message.tags == 'success' %} bg-green-500 {% elif message.tags == 'error' %} bg-red-500 {% endif %}">{{ message }}</div>
+                    {% endfor %}
                 {% endif %}
             </p>
         </div>
         <form method="POST">
             {% comment %} <input type="text" placeholder="Enter Title" class="border-2 border-gray-600 w-full rounded-lg shadow-sm focus:border-rose-300 focus: ring-red-400"> {% endcomment %}
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ task_form }}
+            {{ task_detail_form }}
             <button type="submit" class="bg-rose-400 px-3 py-2 text-white mt-2 rounded-md hover:bg-cyan-300 hover:text-black transform hover:scale-105">submit</button>
         </form>
     </div>
