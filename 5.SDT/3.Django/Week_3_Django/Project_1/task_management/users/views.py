@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm, CustomRegistrationForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -13,7 +14,13 @@ def sign_up(request):
         form = CustomRegistrationForm(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
-            form.save()
+            user = form.save(commit = False)
+            user.set_password(form.cleaned_data['password1'])   
+            user.is_active = False
+            user.save()
+            
+            messages.success(request, "A confirmation email has been sent to your email address.")
+            return redirect("sign-in")
             
     return render(request,'registration/sign_up.html', {"form": form})
 
