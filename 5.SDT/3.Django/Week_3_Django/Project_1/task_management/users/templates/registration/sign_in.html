@@ -12,17 +12,31 @@
 <body class="bg-[#F5F5F5]">
     <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded-md shadow-md">
+            {% if messages %}
+                <div class="space-y-2">
+                    {% for message in messages %}
+                        <p class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+
             <h1 class="text-3xl font-bold mb-4">Sign In</h1>
             <form method='POST' class="space-y-4">
                 {% csrf_token %}
-                <div class="flex flex-col">
+                {{ form.as_p }}
+                {% comment %} <div class="flex flex-col">
                     <label for="username" class="text-sm font-semibold">Username</label>
                     <input type="text" id="username" name="username" class="border-2 border-gray-300 p-2 rounded-md w-full" placeholder="Enter your username">
                 </div>
                 <div class="flex flex-col">
                     <label for="password" class="text-sm font-semibold">Password</label>
                     <input type="password" id="password" name="password" class="border-2 border-gray-300 p-2 rounded-md w-full" placeholder="Enter your password">
-                </div>
+                </div> {% endcomment %}
                 <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md w-full">Sign In</button>
             </form>
         </div>

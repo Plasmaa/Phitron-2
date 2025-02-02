@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 import re
 from tasks.forms import StyledFormMixin
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class RegistrationForm(UserCreationForm):
@@ -18,12 +19,12 @@ class RegistrationForm(UserCreationForm):
             
             
 class CustomRegistrationForm(StyledFormMixin,forms.ModelForm):
-    password1 = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput)
     Confirm_password = forms.CharField(widget=forms.PasswordInput)
     
     class Meta:
         model = User
-        fields = ['username','first_name','last_name', 'password1','Confirm_password', 'email']
+        fields = ['username','first_name','last_name', 'password','Confirm_password', 'email']
         
     
     def clean_email(self):
@@ -37,31 +38,31 @@ class CustomRegistrationForm(StyledFormMixin,forms.ModelForm):
         
         
     def clean_password1(self):
-        password1 = self.cleaned_data.get('password1')
+        password = self.cleaned_data.get('password')
         errors = []
         
-        if len(password1) < 8:
+        if len(password) < 8:
             errors.append("Password must be at least 8 characters long.")
             
-        if not re.search(r'[A-Z]', password1):
+        if not re.search(r'[A-Z]', password):
             errors.append(
                 'Password must include at least one uppercase letter.')
             
-        if not re.search(r'[a-z]', password1):
+        if not re.search(r'[a-z]', password):
             errors.append(
                 'Password must include at least one lowercase letter.')
             
-        if not re.search(r'[0-9]', password1):
+        if not re.search(r'[0-9]', password):
             errors.append('Password must include at least one number.')
             
-        if not re.search(r'[@#$%^&+=]', password1):
+        if not re.search(r'[@#$%^&+=]', password):
             errors.append(
                 'Password must include at least one special character.')
             
         if errors:
             raise forms.ValidationError(errors)
         
-        
+        return password
         
     def clean(self): # non field errors
         cleaned_data = super().clean()
@@ -73,3 +74,7 @@ class CustomRegistrationForm(StyledFormMixin,forms.ModelForm):
         
         return cleaned_data
         
+
+class LoginForm(StyledFormMixin,AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
