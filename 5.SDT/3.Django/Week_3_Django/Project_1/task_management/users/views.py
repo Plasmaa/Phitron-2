@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm, CustomRegistrationForm
 from django.contrib import messages
 from users.forms import LoginForm
+from django.contrib.auth.tokens import default_token_generator
 
 # Create your views here.
 
@@ -16,7 +17,7 @@ def sign_up(request):
         if form.is_valid():
             print(form.cleaned_data)
             user = form.save(commit = False)
-            user.set_password(form.cleaned_data['password1'])   
+            user.set_password(form.cleaned_data['password'])   
             user.is_active = False
             user.save()
             
@@ -24,6 +25,18 @@ def sign_up(request):
             return redirect("sign-in")
             
     return render(request,'registration/sign_up.html', {"form": form})
+def activate_user(request,user_id,token):
+    try:
+        user = User.objects.get(id=user_id)
+        if default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            login(request, user)
+            return redirect("sign-in")
+        else:
+            return HttpResponse("invalid id or token")
+    except User.DoesNotExist:
+        return HttpResponse("User not found")
 
 
 def sign_in(request):
