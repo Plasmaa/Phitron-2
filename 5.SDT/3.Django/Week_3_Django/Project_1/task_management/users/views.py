@@ -55,3 +55,7 @@ def sign_out(request):
     if request.method == 'POST':
         logout(request)
         return redirect('sign-in')
+    
+    
+def admin_dashboard(request):
+    return render(request, 'admin/dashboard.html')
