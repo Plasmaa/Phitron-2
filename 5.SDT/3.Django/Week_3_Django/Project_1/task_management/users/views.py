@@ -6,6 +6,7 @@ from django.contrib import messages
 from users.forms import LoginForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db.models import Prefetch
 
 # Create your views here.
 
@@ -91,11 +92,19 @@ def create_group(request):
 
 @user_passes_test(is_admin, login_url='no-permission')
 def group_list(request):
-    groups = Group.objects.all()
+    groups = Group.objects.prefetch_related('permissions').all()
     return render(request, 'admin/group_list.html', {'groups': groups})
             
     
 @user_passes_test(is_admin, login_url='no-permission')
 def admin_dashboard(request):
-    users = User.objects.all()
+    users = User.objects.prefetch_related(
+        Prefetch('groups', queryset=Group.objects.all(), to_attr='all_groups')
+    ).all()
+    print(users)
+    for user in users:
+        if user.all_groups:
+            user.group_name = user.all_groups[0].name
+        else:
+            user.group_name = 'No Group Assigned'
     return render(request, 'admin/dashboard.html', {'users': users})
