@@ -10,7 +10,7 @@
 <body>
     <div>
         <ul>
-            {% for task in tasks  %}
+            {% for task in tasks %}
             <li>{{ task.title }}</li>
             {% endfor %}
         </ul>
@@ -31,10 +31,10 @@
         <h2>All Tasks</h2>
         <ul>
             {% for task in tasks %}
-                <li>
-                    <p>{{ task.title }}</p>
-                    <span>{{ task.status }}</span>
-                </li>
+            <li>
+                <p>{{ task.title }}</p>
+                <span>{{ task.status }}</span>
+            </li>
             {% endfor %}
         </ul>
     </div> {% endcomment %}
@@ -62,9 +62,9 @@
         <h2>Completed Tasks</h2>
         <ul>
             {% for task in completed_tasks %}
-                <li>
-                    <p>{{ task.title }}</p>
-                </li>
+            <li>
+                <p>{{ task.title }}</p>
+            </li>
             {% endfor %}
         </ul>
     </div>
@@ -74,9 +74,9 @@
         <h2>Pending Tasks</h2>
         <ul>
             {% for task in pending_tasks %}
-                <li>
-                    <p>{{ task.title }}</p>
-                </li>
+            <li>
+                <p>{{ task.title }}</p>
+            </li>
             {% endfor %}
         </ul>
     </div>
@@ -87,9 +87,9 @@
         <ul>
             <!-- loop through tasks and display title -->
             {% for task in tasks_date %}
-                <li>
-                    <p>{{ task.title }}</p>
-                </li>
+            <li>
+                <p>{{ task.title }}</p>
+            </li>
             {% endfor %}
         </ul>
     </div>
@@ -98,24 +98,24 @@
     <div>
         <h3>High Priority</h3>
         <ul>
-        {% for task in high_priority_tasks %}
+            {% for task in high_priority_tasks %}
             <li>
                 <p>{{ task.task }}</p>
                 <span>{{ task.priority }}</span>
             </li>
-        {% endfor %}
-        </ul>  
+            {% endfor %}
+        </ul>
     </div>
-    
-    {% comment %} words paper in it  {% endcomment %}
+
+    {% comment %} words paper in it {% endcomment %}
     <div>
         <h3>Tasks with word paper</h3>
         <ul>
-        {% for task in tasks_word %}
+            {% for task in tasks_word %}
             <li>
                 <p>{{ task.title }}</p>
             </li>
-        {% endfor %}
+            {% endfor %}
         </ul>
     </div>
 
