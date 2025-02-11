@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate, logout
-from .forms import RegistrationForm, CustomRegistrationForm, AssignedRoleForm
+from django.contrib.auth.models import User, Group
+from django.contrib.auth import login, logout
+from users.forms import CustomRegistrationForm, AssignRoleForm, CreateGroupForm
 from django.contrib import messages
 from users.forms import LoginForm
 from django.contrib.auth.tokens import default_token_generator
@@ -58,17 +57,32 @@ def sign_out(request):
     
 def assign_role(request, user_id):
     user = User.objects.get(id=user_id)
-    form = AssignedRoleForm()
+    form = AssignRoleForm()
     
     if request.method == 'POST':
-        form = AssignedRoleForm(request.POST)
+        form = AssignRoleForm(request.POST)
         if form.is_valid():
-            role = form.cleaned_data['role']
-            user.group.clear()
-            messages.success(request, f"User {user.username} has been assigned the role {role.name}")
+            role = form.cleaned_data.get('role')
+            user.groups.clear() # Remove old roles
+            user.groups.add(role)
+            messages.success(request, f"User {user.username} has been assigned to the {role.name} role")
             return redirect('admin-dashboard')
+    
+    return render(request, 'admin/assign_role.html', {"form": form})
+def create_group(request):
+    form = CreateGroupForm()
+    if request.method == 'POST':
+        form = CreateGroupForm(request.POST)
         
-    return render(request, 'admin/assign_role.html', {'form': form, 'user': user})
+        if form.is_valid():
+            group = form.save()
+            messages.success(request, f"Group {group.name} has been created successfully")
+            return redirect('create-group')
+        
+    return render(request, 'admin/create_group.html', {'form': form})
+def group_list(request):
+    groups = Group.objects.all()
+    return render(request, 'admin/group_list.html', {'groups': groups})
             
     
 def admin_dashboard(request):
