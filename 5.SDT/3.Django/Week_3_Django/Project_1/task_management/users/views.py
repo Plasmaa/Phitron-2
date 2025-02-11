@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
-from .forms import RegistrationForm, CustomRegistrationForm
+from .forms import RegistrationForm, CustomRegistrationForm, AssignedRoleForm
 from django.contrib import messages
 from users.forms import LoginForm
 from django.contrib.auth.tokens import default_token_generator
@@ -56,6 +56,21 @@ def sign_out(request):
         logout(request)
         return redirect('sign-in')
     
+def assign_role(request, user_id):
+    user = User.objects.get(id=user_id)
+    form = AssignedRoleForm()
+    
+    if request.method == 'POST':
+        form = AssignedRoleForm(request.POST)
+        if form.is_valid():
+            role = form.cleaned_data['role']
+            user.group.clear()
+            messages.success(request, f"User {user.username} has been assigned the role {role.name}")
+            return redirect('admin-dashboard')
+        
+    return render(request, 'admin/assign_role.html', {'form': form, 'user': user})
+            
     
 def admin_dashboard(request):
-    return render(request, 'admin/dashboard.html')
+    users = User.objects.all()
+    return render(request, 'admin/dashboard.html', {'users': users})

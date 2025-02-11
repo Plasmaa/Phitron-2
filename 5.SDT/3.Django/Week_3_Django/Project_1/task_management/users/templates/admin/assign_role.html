@@ -1,0 +1,11 @@
+{% extends "admin/dashboard.html" %}
+{% block content %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="px-2 py-1 text-white bg-blue-400"></button>
+        </form>
+    </div>
+{% endblock content %}
+
